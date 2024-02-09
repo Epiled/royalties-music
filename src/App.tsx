@@ -1,11 +1,7 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import EstilosGlobais from './styles/EstilosGlobais'
 import Home from './pages/Home'
+import Menu from './components/Menu'
 
 
 const App: React.FC = () => {
@@ -13,6 +9,7 @@ const App: React.FC = () => {
   return (
     <Router>
       <EstilosGlobais />
+      <Menu />
 
       {/* Rotas */}
       <Routes>

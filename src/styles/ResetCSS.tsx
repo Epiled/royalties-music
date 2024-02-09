@@ -23,7 +23,6 @@ const ResetCSS: React.FC = createGlobalStyle`
     margin: 0;
     padding: 0;
     border: 0;
-    font: inherit;
     vertical-align: baseline;
   }
   /* HTML5 display-role reset for older browsers */
@@ -49,9 +48,17 @@ const ResetCSS: React.FC = createGlobalStyle`
     border-collapse: collapse;
     border-spacing: 0;
   }
+  img {
+    width: 100%;
+    height: auto;
+  }
+  a {
+    text-decoration: none;
+  }
   * {
     font-size: 62.5%;
     box-sizing: border-box;
+    font-family: Urbanist;
   }
 `
 
