@@ -8,6 +8,8 @@ const Variaveis: React.FC = createGlobalStyle`
     --color-main: #6A00FF;
     --color-secondary: #FFC900;
 
+    --color-gradient: linear-gradient(90deg, var(--color-main), var(--color-secondary));
+
     --color-txt: #1A1A1A;
   }
 `

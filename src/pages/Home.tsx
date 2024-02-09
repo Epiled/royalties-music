@@ -1,7 +1,6 @@
-const Home: React.FC = () => {
+const Home = () => {
   return (
     <>
-    <p>Olá</p>
     </>
   );
 }

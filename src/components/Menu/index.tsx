@@ -35,10 +35,18 @@ const BotoesContainer = styled.div`
 
 const BotaoMenu = styled(Hamburguer) <IIcon>`
   display: ${props => props.$visibilidade ? 'none' : 'block'};
+
+  @media screen and (min-width: 1024px) {
+    display: none;
+  }
 `
 
 const BotaoClose = styled(Close) <IIcon>`
   display: ${props => props.$visibilidade ? 'none' : 'block'};
+
+  @media screen and (min-width: 1024px) {
+    display: none;
+  }
 `
 
 const MenuWrapper = styled.div <{ $visibilidade: boolean }>`
@@ -60,6 +68,7 @@ const MenuWrapper = styled.div <{ $visibilidade: boolean }>`
     max-width: 94.4rem;
     width: 100%;
     height: 100%;
+    right: 0;
   }
 `
 
@@ -137,6 +146,19 @@ const SwitchContainer = styled.label`
   width: 4.8rem;
   height: 2.5rem;
   align-self: center;
+
+  &::before {
+    content: "";
+    position: absolute;
+    z-index: 0;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 16px;
+    width: calc(100% + 0.3rem);
+    height: calc(100% + 0.3rem);
+    background: var(--color-gradient);
+  }
 `
 
 const Bolinha = styled.span`
@@ -146,21 +168,23 @@ const Bolinha = styled.span`
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #ccc;
+  background-color: var(--lighter);
   -webkit-transition: .4s;
   transition: .4s;
-  border-radius: 34px;
+  border-radius: 12.5rem;
+
 
   &:before {
     position: absolute;
     content: "";
-    height: 26px;
-    width: 26px;
-    left: 4px;
-    bottom: 4px;
-    background-color: white;
+    height: 2.3rem;
+    width: 2.3rem;
+    left: .1rem;
+    bottom: .1rem;
     -webkit-transition: .4s;
     transition: .4s;
+    border-radius: 11.5rem;
+    background: var(--color-gradient);
   }
 `
 
@@ -170,15 +194,11 @@ const Switch = styled.input`
   height: 0;
 
   &:checked + ${Bolinha} {
-    background-color: #2196F3;
-  }
-
-  &:focus + ${Bolinha} {
-    box-shadow: 0 0 1px #2196F3;
+    background-color: var(--darker);
   }
 
   &:checked + ${Bolinha}::before {
-    transform: translateX(26px);
+    transform: translateX(2.3rem);
   }
 `
 
