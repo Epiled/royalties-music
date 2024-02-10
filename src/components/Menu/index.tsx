@@ -4,8 +4,7 @@ import Logo from '@assets/svg/logo.svg?react'
 import Hamburguer from '@assets/svg/menu-burguer.svg?react'
 import Close from '@assets/svg/menu-close.svg?react'
 import styled from 'styled-components'
-import { RefObject, useState } from 'react'
-import classNames from 'classnames'
+import { useState } from 'react'
 
 interface IIcon {
   $visibilidade: boolean
@@ -18,14 +17,17 @@ const MenuEstilizado = styled.header`
   right: 0;
   height: 100vh;
   display: flex;
+  z-index: 5;
 
   @media screen and (min-width: 1024px) {
     display: flex;
     justify-content: center;
     max-height: 8rem;
     width: 100%;
+    background: var(--lighter);
   }
 `
+
 const BotoesContainer = styled.div`
   position: absolute;
   top: 2rem;
@@ -120,15 +122,15 @@ const Opcoes = styled.div`
     }
 
     @media screen and (max-width: 1023px) {
-        &::after {
-          content: '';
-          position: absolute;
-          bottom: -3rem;
-          left: 0;
-          background-color: var(--darker);
-          width: 100%;
-          height: .3rem;
-          border-radius: 1.5rem;
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: -3rem;
+        left: 0;
+        background-color: var(--darker);
+        width: 100%;
+        height: .3rem;
+        border-radius: 1.5rem;
       }
     }
   }

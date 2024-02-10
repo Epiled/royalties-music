@@ -55,6 +55,9 @@ const ResetCSS: React.FC = createGlobalStyle`
   a {
     text-decoration: none;
   }
+  span {
+    font-size: inherit;
+  }
   * {
     font-size: 62.5%;
     box-sizing: border-box;
