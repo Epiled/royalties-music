@@ -37,9 +37,11 @@ const PlataformaLogo = styled.img`
 
 const IconContainer = styled.div``
 
-const Icon = styled.img`
+const Icon = styled.img<{animate?: boolean}>`
   width: 2rem;
   height: 2rem;
+  animation: 
+    ${props => props.animate ? 'pulsant .5s ease infinite, fade-in 3s forwards' : 'fade-in 5s forwards'};
 
   @media screen and (min-width: 768px) {
     width: 3rem;
@@ -72,7 +74,7 @@ const Plataforma = ({ nome, busca }: IPlataforma) => {
       <IconContainer>
         {busca ?
           <>
-            <Icon src={dollar} />
+            <Icon animate={true} src={dollar} />
             <Icon src={confirmado} />
           </>
           :

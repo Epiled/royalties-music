@@ -201,8 +201,8 @@ const Menssagem = styled(Link) <{ $visibilidade: string }>`
   text-decoration: underline;
   text-transform: uppercase;
   margin-top: 4rem;
-  opacity: ${props => props.$visibilidade ? 1 : 0};
-  transition: 1.5s opacity;
+  opacity: 0;
+  animation: ${props => props.$visibilidade ? 'bounce-top 1s forwards' : ''};
 `
 
 const ListaPlataformas = [
