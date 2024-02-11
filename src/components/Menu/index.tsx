@@ -22,9 +22,9 @@ const MenuEstilizado = styled.header`
   @media screen and (min-width: 1024px) {
     display: flex;
     justify-content: center;
+    background-color: var(--lighter);
     max-height: 8rem;
     width: 100%;
-    background: var(--lighter);
   }
 `
 
@@ -52,25 +52,37 @@ const BotaoClose = styled(Close) <IIcon>`
 `
 
 const MenuWrapper = styled.div <{ $visibilidade: boolean }>`
-  display: flex;
-  flex-direction: column;
-  gap: 1.8rem;
-  background: var(--lighter);
   color: var(--darker);
   max-width: 22.6rem;
   flex: 1;
   position: relative;
   top: 0;
-  right: ${props => props.$visibilidade ? '-22.6rem' : '0'};
+  right: 0;
+
 
   @media screen and (min-width: 1024px) {
-    flex-direction: row;
-    align-items: center;
-    gap: 0;
+    display: flex;
     max-width: 94.4rem;
     width: 100%;
     height: 100%;
-    right: 0;
+  }
+`
+
+const MenuClip = styled.div <{ $visibilidade: boolean }>`
+  display: flex;
+  flex-direction: column;
+  gap: 1.8rem;
+  background: var(--lighter);
+  height: 100vh;
+  clip-path: ${props => props.$visibilidade ?
+    'ellipse(10rem 10rem at 100% 0%)' :
+    'ellipse(120vh 120vh at 100% 0%)'};
+  transition: clip-path 1.5s ease-in-out;
+
+  @media screen and (min-width: 1024px) {
+    flex-direction: row;
+    height: 100%;
+    clip-path: none;
   }
 `
 
@@ -98,7 +110,6 @@ const Navegacao = styled.nav`
     justify-content: space-between;
     padding: 0;
     margin-left: 8rem;
-    margin-right: 3.8rem;
   }
 `
 
@@ -111,6 +122,7 @@ const Opcoes = styled.div`
     flex-direction: row;
     max-width: none;
     gap: 2.8rem;
+    align-items: center;
   }
 
   &:first-of-type {
@@ -235,21 +247,23 @@ const Menu = () => {
       <MenuWrapper $visibilidade={!menuOpen}>
         <LogoEstilizado />
 
-        <Navegacao>
-          <Opcoes>
-            <LinkEstilizado to={'/'}>Nosso serviço</LinkEstilizado>
-            <LinkEstilizado to={'/'}>Contatos</LinkEstilizado>
-          </Opcoes>
-          <Opcoes>
-            <LinkEstilizado to={'/'}>Login</LinkEstilizado>
-            <LinkEstilizado to={'/'}>Cadastre-se</LinkEstilizado>
-          </Opcoes>
-        </Navegacao>
+        <MenuClip $visibilidade={!menuOpen}>
+          <Navegacao>
+            <Opcoes>
+              <LinkEstilizado to={'/'}>Nosso serviço</LinkEstilizado>
+              <LinkEstilizado to={'/'}>Contatos</LinkEstilizado>
+            </Opcoes>
+            <Opcoes>
+              <LinkEstilizado to={'/'}>Login</LinkEstilizado>
+              <LinkEstilizado to={'/'}>Cadastre-se</LinkEstilizado>
+            </Opcoes>
+          </Navegacao>
 
-        <SwitchContainer>
-          <Switch checked={isChecked} onChange={handleSwitchChange} type='checkbox' />
-          <Bolinha />
-        </SwitchContainer>
+          <SwitchContainer>
+            <Switch checked={isChecked} onChange={handleSwitchChange} type='checkbox' />
+            <Bolinha />
+          </SwitchContainer>
+        </MenuClip>
       </MenuWrapper>
     </MenuEstilizado>
   )
