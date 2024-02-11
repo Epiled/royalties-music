@@ -2,13 +2,12 @@
 import styled from 'styled-components'
 import video from '@assets/video/bg.mp4'
 import bgImagem from '@assets/img/textura.png'
-import AmazonMusic from '@assets/svg/Plataformas/AmazonMusic.svg'
-import AppleMusic from '@assets/svg/Plataformas/AppleMusic.svg'
-import Deezer from '@assets/svg/Plataformas/Deezer.svg'
-import Spotify from '@assets/svg/Plataformas/Spotify.svg'
-import TikTok from '@assets/svg/Plataformas/TikTok.svg'
-import YoutubeMusic from '@assets/svg/Plataformas/YoutubeMusic.svg'
+
 import Microfone from '@assets/svg/Microfone.svg'
+
+import { Link } from 'react-router-dom'
+import { useState } from 'react'
+import Plataforma from '../Plataforma'
 
 const BannerEstilizado = styled.section`
   display: flex;
@@ -87,26 +86,26 @@ const Plataformas = styled.div`
 
   @media screen and (min-width: 768px) {
     grid-template-columns: repeat(3, 15rem);
-    gap: 9rem 11rem;
+    gap: 5rem 11rem;
     margin: 5rem 0 8.5rem 0;
   }
 
   @media screen and (min-width: 1024px) {
     grid-template-columns: repeat(6, 12rem);
     gap: 4.5rem;
-    margin: 4rem 0 5rem 0;
+    margin: 4rem 0 3rem 0;
   }
 `
-
-const Plataforma = styled.img``
 
 const Buscador = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 2rem;
-  margin: 0 2rem;
+  margin: 0 auto;
   position: relative;
+  max-width: 35rem;
+  width: 100%;
 
   @media screen and (min-width: 768px) {
     background-color: var(--color-black-60);
@@ -120,6 +119,22 @@ const Buscador = styled.div`
   }
 `
 
+const BordaGradiente = styled.div`
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0.3rem;
+  border-radius: 5rem;
+  background: var(--color-gradient-animate);
+  background-size: 400% 400%;
+  animation: gradient 15s linear infinite;
+
+  @media screen and (min-width: 768px) {
+    margin: 0;
+  }
+`
+
 const CampoBusca = styled.input`
   background-color: var(--color-black-60);
   background-image: url(${Microfone});
@@ -129,16 +144,14 @@ const CampoBusca = styled.input`
 
   border-radius: 5rem;
   border: 0;
+  outline: 0;
 
   color: var(--lighter);
   font-size: 1.2rem;
   font-weight: 200;
-  margin: 0 auto;
   padding-left: 4rem;
   width: 100%;
   height: 3.5rem;
-  max-width: 35rem;
-  position: relative;
 
   &::placeholder {
     color: var(--lighter);
@@ -148,14 +161,12 @@ const CampoBusca = styled.input`
     background-position: 1.4rem 1.5rem;
     font-size: 1.6rem;
     height: 5rem;
-    align-items: center;
   }
 
   @media screen and (min-width: 768px) {
-    margin: 0;
-    background-color: transparent;
-    flex: 1;
-    max-width: none;
+    height: -webkit-fill-available;
+    padding-right: 16rem;
+    background-position: 1.4rem 1.2rem
   }
 `
 
@@ -175,13 +186,54 @@ const BotaoBusca = styled.button`
   animation: gradient 15s linear infinite;
 
   @media screen and (min-width: 768px) {
-    height: 100%;
     width: 14.8rem;
+    height: 100%;
+    position: absolute;
+    right: 0;
   }
 `
 
+const Menssagem = styled(Link)`
+  color: var(--lighter);
+  font-size: 1.6rem;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: underline;
+  text-transform: uppercase;
+  margin-top: 4rem;
+`
+
+const ListaPlataformas = [
+  {
+    'id': 1,
+    'nome': 'AmazonMusic',
+  },
+  {
+    'id': 2,
+    'nome': 'AppleMusic',
+  },
+  {
+    'id': 3,
+    'nome': 'Deezer',
+  },
+  {
+    'id': 4,
+    'nome': 'Spotify',
+  },
+  {
+    'id': 5,
+    'nome': 'TikTok',
+  },
+  {
+    'id': 6,
+    'nome': 'YoutubeMusic',
+  }
+]
+
 const Banner = () => {
 
+  const [resultado, setResultado] = useState('');
+  const [busca, setBusca] = useState('');
 
   return (
     <BannerEstilizado>
@@ -199,20 +251,29 @@ const Banner = () => {
       </Titulo>
 
       <Plataformas>
-        <Plataforma src={AmazonMusic} />
-        <Plataforma src={AppleMusic} />
-        <Plataforma src={Deezer} />
-        <Plataforma src={Spotify} />
-        <Plataforma src={TikTok} />
-        <Plataforma src={YoutubeMusic} />
+        {ListaPlataformas.map((item) => {
+          return <Plataforma key={item.id} busca={resultado} {...item} />
+        })}
       </Plataformas>
 
       <Buscador>
-        <CampoBusca placeholder='Consulte seu nome ou múscia' />
-        <BotaoBusca>
+        <BordaGradiente>
+          <CampoBusca
+            value={busca}
+            onChange={(e) => setBusca(e.target.value)}
+            placeholder='Consulte seu nome ou múscia'
+          />
+        </BordaGradiente>
+        <BotaoBusca onClick={() => setResultado(busca)}>
           Buscar
         </BotaoBusca>
       </Buscador>
+
+      {busca &&
+        <Menssagem to={'/'}>
+          Parece que existir valores para o seu resgate, click aqui e Entre em contato com nossa equipe
+        </Menssagem>
+      }
 
       <Video autoPlay muted>
         <source src={video} type="video/mp4" />

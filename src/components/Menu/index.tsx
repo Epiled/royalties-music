@@ -159,7 +159,9 @@ const SwitchContainer = styled.label`
     border-radius: 16px;
     width: calc(100% + 0.3rem);
     height: calc(100% + 0.3rem);
-    background: var(--color-gradient);
+    background: var(--color-gradient-animate);
+    background-size: 400% 400%;
+    animation: gradient 15s linear infinite;
   }
 `
 
@@ -186,7 +188,9 @@ const Bolinha = styled.span`
     -webkit-transition: .4s;
     transition: .4s;
     border-radius: 11.5rem;
-    background: var(--color-gradient);
+    background: var(--color-gradient-animate);
+    background-size: 400% 400%;
+    animation: gradient 15s linear infinite;
   }
 `
 
