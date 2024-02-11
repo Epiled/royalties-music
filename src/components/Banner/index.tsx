@@ -79,15 +79,15 @@ const Plataformas = styled.div`
   gap: 3.4rem 8rem;
   margin: 2.5rem 0 4rem 0;
 
-  @media screen and (min-width: 430px) {
-    grid-template-columns: repeat(2, 10rem);
-    margin: 4rem 0 5rem 0;
+  @media screen and (min-width: 430px) and (max-width: 768px) {
+    grid-template-columns: repeat(auto-fill, 10rem);
+    margin: 4rem 2rem 5rem 2rem;
   }
 
   @media screen and (min-width: 768px) {
     grid-template-columns: repeat(3, 15rem);
-    gap: 5rem 11rem;
-    margin: 5rem 0 8.5rem 0;
+    gap: 2.5rem 11rem;
+    margin: 5rem 0 4rem 0;
   }
 
   @media screen and (min-width: 1024px) {
@@ -193,7 +193,7 @@ const BotaoBusca = styled.button`
   }
 `
 
-const Menssagem = styled(Link)`
+const Menssagem = styled(Link) <{ $visibilidade: string }>`
   color: var(--lighter);
   font-size: 1.6rem;
   font-weight: bold;
@@ -201,6 +201,8 @@ const Menssagem = styled(Link)`
   text-decoration: underline;
   text-transform: uppercase;
   margin-top: 4rem;
+  opacity: ${props => props.$visibilidade ? 1 : 0};
+  transition: 1.5s opacity;
 `
 
 const ListaPlataformas = [
@@ -269,11 +271,9 @@ const Banner = () => {
         </BotaoBusca>
       </Buscador>
 
-      {busca &&
-        <Menssagem to={'/'}>
-          Parece que existir valores para o seu resgate, click aqui e Entre em contato com nossa equipe
-        </Menssagem>
-      }
+      <Menssagem to={'/'} $visibilidade={resultado}>
+        Parece que existir valores para o seu resgate, click aqui e Entre em contato com nossa equipe
+      </Menssagem>
 
       <Video autoPlay muted>
         <source src={video} type="video/mp4" />
